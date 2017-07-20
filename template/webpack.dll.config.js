@@ -10,7 +10,8 @@ const webpack = require('webpack');
 module.exports = {
     entry: {
         vendor: [
-            'react', 'react-router', 'react-dom', 'prop-types'
+            'react', 'react-router', 'react-dom', 'prop-types', 'react-router-dom',
+            'babel-runtime',
         ]
     },
     output: {

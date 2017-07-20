@@ -19,14 +19,14 @@ if(env === 'development'){
                     <Component />
                 </AppContainer>,
                 document.getElementById('app')
-            )
+            );
         };
 
         render(ParamsExample);
 
         // HMR
         if (module.hot) {
-            module.hot.accept('../general/app/index', () => { render(ParamsExample) })
+            module.hot.accept('../general/app/index', () => { render(ParamsExample); });
         }
     };
 } else {

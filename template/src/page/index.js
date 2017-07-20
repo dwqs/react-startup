@@ -20,7 +20,7 @@ function getAsyncComponent(promise) {
             super(props);
             this.state = {
                 Component: null
-            }
+            };
         }
 
         componentWillMount() {
@@ -28,19 +28,19 @@ function getAsyncComponent(promise) {
                 promise().then(mod => {
                     this.setState({
                         Component: mod.default ? mod.default : mod
-                    })
-                })
+                    });
+                });
             }
         }
         render() {
-            const { Component } = this.state
+            const { Component } = this.state;
             if (Component) {
-                return <Component {...this.props} />
+                return <Component {...this.props} />;
             }
             // Failed to resolve async component
             return null;
         }
-    }
+    };
 }
 
 const App = () => import(/* webpackChunkName: "app1" */ '../general/app/index');

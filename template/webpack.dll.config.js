@@ -11,7 +11,7 @@ module.exports = {
     entry: {
         vendor: [
             'react', 'react-router', 'react-dom', 'prop-types', 'react-router-dom',
-            'babel-runtime',
+            'babel-runtime', 'history'
         ]
     },
     output: {

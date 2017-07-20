@@ -7,7 +7,7 @@ import './reset.less';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import createBrowserHistory from 'history/createBrowserHistory'
+import createBrowserHistory from 'history/createBrowserHistory';
 import { AppContainer } from 'react-hot-loader';
 
 import App from '../general/app/index';
@@ -24,7 +24,7 @@ const RootApp = () => {
                 <Route path='/info' component={Info}></Route>
             </Switch>
         </Router>
-    )
+    );
 };
 
 if(env === 'development'){

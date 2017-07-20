@@ -5,6 +5,8 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
+import './index.less';
+
 class Child extends React.Component{
     render() {
         console.log('111child', this.props);

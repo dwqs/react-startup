@@ -150,7 +150,7 @@ module.exports = Object.assign({},prodConfig,{
         path: config.build.assetsRoot,
         publicPath: config.build.assetsPublicPath,
         sourceMapFilename: "[file].map",
-        chunkFilename: "[name].[chunkhash:8].js",
-        devtool: "source-map"
-    }
+        chunkFilename: "[name].[chunkhash:8].js"
+    },
+    devtool: "source-map"
 });

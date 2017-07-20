@@ -46,7 +46,7 @@ prodConfig.plugins = (prodConfig.plugins || []).concat([
     }),
 
     new webpack.DefinePlugin({
-        'process.env': JSON.stringify(config.build.env)
+        'process.env': config.build.env
     }),
 
     new ExtractTextPlugin({

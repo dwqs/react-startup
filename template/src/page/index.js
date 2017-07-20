@@ -43,7 +43,7 @@ function getAsyncComponent(promise) {
     };
 }
 
-const App = () => import(/* webpackChunkName: "app1" */ '../general/app/index');
+const App = () => import(/* webpackChunkName: "main" */ '../general/app/index');
 const Info = () => import(/* webpackChunkName: "info" */ '@components/info/index');
 
 const RootApp = () => {
@@ -52,6 +52,7 @@ const RootApp = () => {
             <Switch>
                 <Route exact path='/' component={getAsyncComponent(App)}></Route>
                 <Route path='/info' component={getAsyncComponent(Info)}></Route>
+                <Route render={() => <div>404 not found</div>}></Route>
             </Switch>
         </Router>
     );

@@ -2,36 +2,33 @@
  * Created by pomy on 20/07/2017.
  */
 
-import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-
 import './index.less';
 
-class Child extends React.Component{
-    render() {
-        console.log('111child', this.props);
-        let {match} = this.props;
-        return (
-            <div className="child">{match.params.id}</div>
-        )
-    }
-}
+import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
-export default class ParamsExample extends React.Component {
+import Hello from '@components/hello/index';
+
+
+export default class App extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            title: 'webpack 3 + react 15 + react-router 4'
+        }
+    }
+
     render() {
         return (
-            <Router>
-                <div>
-                    <h2>Accounts</h2>
-                    <ul>
-                        <li><Link to="/netflix">Netflix11</Link></li>
-                        <li><Link to="/zillow-group">Zillow Group</Link></li>
-                        <li><Link to="/yahoo">Yahoo</Link></li>
-                        <li><Link to="/modus-create">Modus Create</Link></li>
-                    </ul>
-                    <Route path="/:id" component={Child}/>
-                </div>
-            </Router>
+            <div>
+                <h3>{this.state.title}</h3>
+                <Hello />
+                <p className="doc">
+                    Documentation can be found at:
+                    <a href="https://github.com/dwqs/react-startup" target="_blank">react-startup</a>
+                </p>
+                <Link to="/info">查看项目信息</Link>
+            </div>
         )
     }
 }

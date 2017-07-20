@@ -15,7 +15,11 @@
     node: true,
     browser: true
   },
-  extends: "vue",
+  extends: [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:react/recommended"
+  ],
   rules: {
     indent: [2, 4],
     quotes: [2, "single", { "allowTemplateLiterals": true }],

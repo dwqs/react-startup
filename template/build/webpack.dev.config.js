@@ -18,7 +18,8 @@ const url = `http://localhost:${config.dev.port}/`;
 devConfig.module.rules.unshift({
     test: /\.jsx?$/,
     exclude: /node_modules/,
-    use: ['happypack/loader?id=js-dev']
+    // happypack/loader?id=js-dev
+    use: ['babel-loader']
 },{
     test: /\.less$/,
     use: ['happypack/loader?id=less-dev']
@@ -28,16 +29,16 @@ devConfig.module.rules.unshift({
 });
 
 devConfig.plugins = (devConfig.plugins || []).concat([
+    // new HappyPack(getHappyPackConfig({
+    //     id: 'js-dev',
+    //     loaders: ['babel-loader']
+    // })),
+
     new webpack.HotModuleReplacementPlugin(),
 
     new webpack.DefinePlugin({
-        'process.env': JSON.stringify(config.dev.env)
+        'process.env': config.dev.env
     }),
-
-    new HappyPack(getHappyPackConfig({
-        id: 'js-dev',
-        loaders: ['react-hot-loader','babel-loader']
-    })),
 
     new HappyPack(getHappyPackConfig({
         id: 'less-dev',

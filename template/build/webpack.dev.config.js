@@ -18,8 +18,7 @@ const url = `http://localhost:${config.dev.port}/`;
 devConfig.module.rules.unshift({
     test: /\.jsx?$/,
     exclude: /node_modules/,
-    // happypack/loader?id=js-dev
-    use: ['babel-loader']
+    use: ['happypack/loader?id=js-dev']
 },{
     test: /\.less$/,
     use: ['happypack/loader?id=less-dev']
@@ -29,10 +28,10 @@ devConfig.module.rules.unshift({
 });
 
 devConfig.plugins = (devConfig.plugins || []).concat([
-    // new HappyPack(getHappyPackConfig({
-    //     id: 'js-dev',
-    //     loaders: ['babel-loader']
-    // })),
+    new HappyPack(getHappyPackConfig({
+        id: 'js-dev',
+        loaders: ['babel-loader']
+    })),
 
     new webpack.HotModuleReplacementPlugin(),
 
@@ -88,6 +87,7 @@ devConfig.devServer = {
 module.exports = Object.assign({},devConfig,{
     entry: {
         app:[
+            'react-hot-loader/patch',
             'webpack/hot/dev-server',
             `webpack-dev-server/client?http://localhost:${config.dev.port}/`,
             path.resolve(__dirname, '../src/page/index.js')

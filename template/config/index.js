@@ -4,7 +4,7 @@ let path = require('path');
 
 module.exports =  {
     dev:{
-        env: require('./dev.env.js'),
+        env: 'development',
         assetsRoot: path.resolve(__dirname, '../dist'),
         assetsPublicPath: '/',
         contentBase: path.resolve(__dirname, '../dist'),
@@ -12,7 +12,7 @@ module.exports =  {
         prefix: ''
     },
     build:{
-        env: require('./prod.env.js'),
+        env: 'production',
         assetsRoot: path.resolve(__dirname, '../dist'),
         assetsPublicPath: '/',
         prefix: ''

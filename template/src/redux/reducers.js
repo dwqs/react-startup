@@ -10,4 +10,4 @@ import TodoReducer from './todo/reducer';
 export  default combineReducers({
     time: TimeReducer,
     // todo: TodoReducer
-})
+});

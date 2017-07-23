@@ -11,6 +11,10 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import {getAsyncComponent} from 'async-react-component';
 import { AppContainer } from 'react-hot-loader';
 
+import { Provider } from 'react-redux';
+
+import store from '../redux/store';
+
 const history = createBrowserHistory();
 const env = process.env.NODE_ENV || 'development';
 
@@ -19,13 +23,15 @@ const Info = () => import(/* webpackChunkName: "info" */ '@components/info/index
 
 const RootApp = () => {
     return (
-        <Router history={history}>
-            <Switch>
-                <Route exact path='/' component={getAsyncComponent(App)}></Route>
-                <Route path='/info' component={getAsyncComponent(Info)}></Route>
-                <Route render={() => <div>404 not found</div>}></Route>
-            </Switch>
-        </Router>
+        <Provider store={store}>
+            <Router history={history}>
+                <Switch>
+                    <Route exact path='/' component={getAsyncComponent(App)}></Route>
+                    <Route path='/info' component={getAsyncComponent(Info)}></Route>
+                    <Route render={() => <div>404 not found</div>}></Route>
+                </Switch>
+            </Router>
+        </Provider>
     );
 };
 

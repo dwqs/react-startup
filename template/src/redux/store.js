@@ -5,8 +5,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
-import ReduxThunk from 'redux-thunk';
-import promiseMiddleware from 'redux-promise';
+import ReduxActionsPromise from 'redux-actions-promise';
 
 import rootReducers from './reducers';
 
@@ -16,6 +15,6 @@ const middleware = routerMiddleware(browserHistory);
 export let store = createStore(combineReducers({
     ...rootReducers,
     router: routerReducer
-}), applyMiddleware(middleware, ReduxThunk));
+}), applyMiddleware(middleware, ReduxActionsPromise));
 
 export let history = browserHistory;

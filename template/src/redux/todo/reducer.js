@@ -9,18 +9,21 @@ export default handleActions({
     [CONSTANT.ADD_TODO]: {
         next(state, action) {
             // async action success
+            console.log('async action success', action)
+            return Object.assign({}, state, {
+                list: [].concat(state.list, action.payload)
+            })
         },
         throw(state, action) {
             // async action error
+            console.log('async action error', action)
+            return Object.assign({}, state);
         }
     },
-    [CONSTANT.DELETE_TODO]: {
-        next(state, action) {
-            // async action success
-        },
-        throw(state, action) {
-            // async action error
-        }
+    [CONSTANT.DELETE_TODO]: (state, action) => {
+        return Object.assign({}, state, {
+            list: state.list.splice(1,0,action.payload)
+        })
     }
 }, {
     list: []

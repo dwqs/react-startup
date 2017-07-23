@@ -13,7 +13,7 @@ const Info = () => import(/* webpackChunkName: "info" */ '@components/info/index
 const routes =
     <Switch>
         <Route exact path='/' component={getAsyncComponent(App)}></Route>
-        <Route exact path='/info' component={getAsyncComponent(Info)}></Route>
+        <Route path='/info' component={getAsyncComponent(Info)}></Route>
         <Route render={() => <div>404 not found</div>}></Route>
     </Switch>;
 

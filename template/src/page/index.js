@@ -7,14 +7,13 @@ import './reset.less';
 import React, {Component, Children} from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
-import createBrowserHistory from 'history/createBrowserHistory';
 import { AppContainer } from 'react-hot-loader';
 
 import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
 
-import store from '../redux/store';
+import {store, history} from '../redux/store';
 
-const history = createBrowserHistory();
 const env = process.env.NODE_ENV || 'development';
 
 import routes from './routes';
@@ -22,9 +21,11 @@ import routes from './routes';
 const RootApp = () => {
     return (
         <Provider store={store}>
-            <Router history={history}>
-                {routes}
-            </Router>
+            <ConnectedRouter history={history}>
+                <Router>
+                    {routes}
+                </Router>
+            </ConnectedRouter>
         </Provider>
     );
 };

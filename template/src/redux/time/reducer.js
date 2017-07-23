@@ -3,7 +3,7 @@
  */
 
 import { handleActions } from 'redux-actions';
-import * as CONSTANT from './types';
+import * as CONSTANT from '../types';
 
 export default handleActions({
     [CONSTANT.CURRENT_TIME]: (state, action) => {

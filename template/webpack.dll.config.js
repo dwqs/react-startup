@@ -10,7 +10,7 @@ const webpack = require('webpack');
 module.exports = {
     entry: {
         vendor: [
-            'react', 'react-router-dom', 'react-dom', 'prop-types', 'history'
+            'react', 'react-router-dom', 'react-dom', 'prop-types', 'history', 'babel-polyfill'
         ]
     },
     output: {

@@ -2,6 +2,7 @@
  * Created by pomy on 20/07/2017.
  */
 
+import 'babel-polyfill';
 import './reset.less';
 
 import React, {Component, Children} from 'react';

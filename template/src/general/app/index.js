@@ -10,24 +10,33 @@ import { connect } from 'react-redux';
 
 import { getCurTime } from '@redux/time/actions';
 
+import {observer,inject} from 'mobx-react';
+
 import Hello from '@components/hello/index';
 
-@connect(
-    state => {
-        return {
-            time: state.time
-        }
-    },
-    {
-        getCurTime
-    }
-)
+// @connect(
+//     state => {
+//         return {
+//             time: state.time
+//         }
+//     },
+//     {
+//         getCurTime
+//     }
+// )
+@inject('time')
+@observer
 export default class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             title: 'webpack 3 + react 15 + react-router 4'
         }
+    }
+
+    getCurTime(){
+        // this.props.getCurTime();
+        this.props.time.getCurTime();
     }
 
     render() {
@@ -44,7 +53,7 @@ export default class App extends React.Component {
                 <Link to="/todo">todo示例</Link>
                 <div className="time">
                     <span> 当前时间: {t.toLocaleString()}</span>
-                    <span onClick={this.props.getCurTime}> 点击更新当前时间</span>
+                    <span onClick={this.getCurTime.bind(this)}> 点击更新当前时间</span>
                 </div>
             </div>
         )

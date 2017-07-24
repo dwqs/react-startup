@@ -10,25 +10,38 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
 
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 
-import {store, history} from '../redux/store';
+// import {store, history} from '../redux/store';
+
+import {Provider} from 'mobx-react';
+import {useStrict} from 'mobx';
+import {stores, history} from '../model/stores';
+
+useStrict(true);
 
 const env = process.env.NODE_ENV || 'development';
 
 import routes from './routes';
 
 const RootApp = () => {
+    // return (
+    //     <Provider store={store}>
+    //         <ConnectedRouter history={history}>
+    //             <Router>
+    //                 {routes}
+    //             </Router>
+    //         </ConnectedRouter>
+    //     </Provider>
+    // );
     return (
-        <Provider store={store}>
-            <ConnectedRouter history={history}>
-                <Router>
-                    {routes}
-                </Router>
-            </ConnectedRouter>
+        <Provider {...stores}>
+            <Router history={history}>
+                {routes}
+            </Router>
         </Provider>
-    );
+    )
 };
 
 if(env === 'development'){

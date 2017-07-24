@@ -10,17 +10,22 @@ import {connect} from 'react-redux';
 
 import {addToDo, deleteToDo} from '@redux/todo/actions';
 
-@connect(
-    state => {
-        return {
-            todo: state.todo
-        }
-    },
-    {
-        addToDo,
-        deleteToDo
-    }
-)
+import {observable} from 'mobx';
+import {observer,inject} from 'mobx-react';
+
+// @connect(
+//     state => {
+//         return {
+//             todo: state.todo
+//         }
+//     },
+//     {
+//         addToDo,
+//         deleteToDo
+//     }
+// )
+@inject('todo')
+@observer
 export default class ToDo extends React.Component{
     constructor(props){
         super(props);
@@ -36,16 +41,19 @@ export default class ToDo extends React.Component{
     }
 
     addTodo(){
-        this.props.addToDo(this.state.val);
+        // this.props.addToDo(this.state.val);
+        this.props.todo.addToDo(this.state.val)
     }
 
     deleteToDo(index) {
-        this.props.deleteToDo(index);
+        // this.props.deleteToDo(index);
+        this.props.todo.deleteToDo(index)
     }
 
     render(){
         let {list} = this.props.todo;
-
+        list = observable(list).slice();
+        console.log('1111render', list)
         return(
             <div className="todo-list">
                 <input type="text" placeholder="输入 todo" value={this.state.val} onChange={this.valChange.bind(this)}/>

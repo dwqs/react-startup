@@ -21,8 +21,10 @@ export default handleActions({
         }
     },
     [CONSTANT.DELETE_TODO]: (state, action) => {
+        let list = state.list;
+        list.splice(action.payload, 1);
         return Object.assign({}, state, {
-            list: state.list.splice(1,0,action.payload)
+            list: list
         })
     }
 }, {

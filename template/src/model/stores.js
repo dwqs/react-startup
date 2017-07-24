@@ -6,16 +6,16 @@ import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
 import createBrowserHistory from 'history/createBrowserHistory';
 
 import time from './time';
-import todoList from './todo';
+import todo from './todo';
 
 const browserHistory = createBrowserHistory();
 const routingStore = new RouterStore();
 
 export let history = syncHistoryWithStore(browserHistory, routingStore);
 
-export let store = {
+export let stores = {
     time,
-    todoList,
+    todo,
     routing: routingStore,
 };
 

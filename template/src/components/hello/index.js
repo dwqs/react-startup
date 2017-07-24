@@ -18,7 +18,7 @@ export default class Hello extends React.PureComponent{
         return (
             <div className="desc">
                 <p>{this.state.desc}</p>
-                <img src="/assets/logo.png" alt="logo" style={{margin: "10px"}}/>
+                <img src="{{publicPath}}assets/logo.png" alt="logo" style=\{{margin: "10px"}}/>
             </div>
         )
     }

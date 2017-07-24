@@ -5,27 +5,33 @@
 import './index.less';
 
 import React, {Component} from 'react';
-
+{{#if_eq state 'redux'}}
 import {connect} from 'react-redux';
 
 import {addToDo, deleteToDo} from '@redux/todo/actions';
-
+{{/if_eq}}
+{{#if_eq state 'mobx'}}
 import {observable} from 'mobx';
 import {observer,inject} from 'mobx-react';
-
-// @connect(
-//     state => {
-//         return {
-//             todo: state.todo
-//         }
-//     },
-//     {
-//         addToDo,
-//         deleteToDo
-//     }
-// )
+{{/if_eq}}
+import Hello from '@components/hello/index';
+{{#if_eq state 'redux'}}
+@connect(
+    state => {
+        return {
+            todo: state.todo
+        }
+    },
+    {
+        addToDo,
+        deleteToDo
+    }
+)
+{{/if_eq}}
+{{#if_eq state 'mobx'}}
 @inject('todo')
 @observer
+{{/if_eq}}
 export default class ToDo extends React.Component{
     constructor(props){
         super(props);
@@ -41,21 +47,31 @@ export default class ToDo extends React.Component{
     }
 
     addTodo(){
-        // this.props.addToDo(this.state.val);
-        this.props.todo.addToDo(this.state.val)
+        {{#if_eq state 'redux'}}
+        this.props.addToDo(this.state.val);
+        {{/if_eq}}
+        {{#if_eq state 'mobx'}}
+        this.props.todo.addToDo(this.state.val);
+        {{/if_eq}}
     }
 
     deleteToDo(index) {
-        // this.props.deleteToDo(index);
+        {{#if_eq state 'redux'}}
+        this.props.deleteToDo(index);
+        {{/if_eq}}
+        {{#if_eq state 'mobx'}}
         this.props.todo.deleteToDo(index)
+        {{/if_eq}}
     }
 
     render(){
         let {list} = this.props.todo;
+        {{#if_eq state 'mobx'}}
         list = observable(list).slice();
-        console.log('1111render', list)
+        {{/if_eq}}
         return(
             <div className="todo-list">
+                <Hello />
                 <input type="text" placeholder="输入 todo" value={this.state.val} onChange={this.valChange.bind(this)}/>
                 <button className="add" onClick={this.addTodo.bind(this)}>添加</button>
                 <ul>

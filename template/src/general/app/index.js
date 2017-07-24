@@ -6,26 +6,31 @@ import './index.less';
 
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+{{#if_eq state 'redux'}}
 import { connect } from 'react-redux';
 
 import { getCurTime } from '@redux/time/actions';
-
+{{/if_eq}}
+{{#if_eq state 'mobx'}}
 import {observer,inject} from 'mobx-react';
-
+{{/if_eq}}
 import Hello from '@components/hello/index';
-
-// @connect(
-//     state => {
-//         return {
-//             time: state.time
-//         }
-//     },
-//     {
-//         getCurTime
-//     }
-// )
+{{#if_eq state 'redux'}}
+@connect(
+    state => {
+        return {
+            time: state.time
+        }
+    },
+    {
+        getCurTime
+    }
+)
+{{/if_eq}}
+{{#if_eq state 'mobx'}}
 @inject('time')
 @observer
+{{/if_eq}}
 export default class App extends React.Component {
     constructor(props){
         super(props);
@@ -35,8 +40,12 @@ export default class App extends React.Component {
     }
 
     getCurTime(){
-        // this.props.getCurTime();
+        {{#if_eq state 'redux'}}
+        this.props.getCurTime();
+        {{/if_eq}}
+        {{#if_eq state 'mobx'}}
         this.props.time.getCurTime();
+        {{/if_eq}}
     }
 
     render() {

@@ -8,7 +8,7 @@ module.exports = {
             "type"    : "string",
             "required": false,
             "message" : "Project name",
-            "default" : "vue-startup"
+            "default" : "react-startup"
         },
         "version": {
             "type"    : "string",
@@ -19,7 +19,7 @@ module.exports = {
             "type"    : "string",
             "required": false,
             "message" : "Project description",
-            "default" : "A new Vue.js project"
+            "default" : "A new React project"
         },
         "author": {
             "type"   : "string",
@@ -72,11 +72,11 @@ module.exports = {
         "jquery": {
             "type": "confirm",
             "message": "Need jQuery(2.1.0, auto import by cdn)?"
-        },
-        "filters": {
-            "src/redux": "state == 'mobx'",
-            "src/model": "state == 'redux'"
         }
+    },
+    "filters": {
+        "src/redux/**/*": "state === 'redux'",
+        "src/model/**/*": "state === 'mobx'"
     },
     "completeMessage": "To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dll\n  npm run dev\n\nDocumentation can be found at https://github.com/dwqs/react-startup"
 }

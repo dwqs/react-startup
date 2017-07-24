@@ -40,13 +40,13 @@ export default class ToDo extends React.Component{
         }
     }
 
-    valChange(e){
+    valChange = (e) => {
         this.setState({
             val: e.target.value
         })
     }
 
-    addTodo(){
+    addTodo = () => {
         {{#if_eq state 'redux'}}
         this.props.addToDo(this.state.val);
         {{/if_eq}}
@@ -55,13 +55,15 @@ export default class ToDo extends React.Component{
         {{/if_eq}}
     }
 
-    deleteToDo(index) {
-        {{#if_eq state 'redux'}}
-        this.props.deleteToDo(index);
-        {{/if_eq}}
-        {{#if_eq state 'mobx'}}
-        this.props.todo.deleteToDo(index)
-        {{/if_eq}}
+    deleteToDo = (index) => {
+        return () => {
+            {{#if_eq state 'redux'}}
+            this.props.deleteToDo(index);
+            {{/if_eq}}
+            {{#if_eq state 'mobx'}}
+            this.props.todo.deleteToDo(index)
+            {{/if_eq}}
+        }
     }
 
     render(){
@@ -72,13 +74,13 @@ export default class ToDo extends React.Component{
         return(
             <div className="todo-list">
                 <Hello />
-                <input type="text" placeholder="输入 todo" value={this.state.val} onChange={this.valChange.bind(this)}/>
-                <button className="add" onClick={this.addTodo.bind(this)}>添加</button>
+                <input type="text" placeholder="输入 todo" value={this.state.val} onChange={this.valChange}/>
+                <button className="add" onClick={this.addTodo}>添加</button>
                 <ul>
                     {
                         list.length ?
                             list.map((item, index) => {
-                                return <li key={index} onClick={this.deleteToDo.bind(this, index)}>{item}</li>
+                                return <li key={index} onClick={this.deleteToDo(index)}>{item}</li>
                             }): null
                     }
                 </ul>

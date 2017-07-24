@@ -39,7 +39,7 @@ export default class App extends React.Component {
         }
     }
 
-    getCurTime(){
+    getCurTime= () => {
         {{#if_eq state 'redux'}}
         this.props.getCurTime();
         {{/if_eq}}
@@ -62,7 +62,7 @@ export default class App extends React.Component {
                 <Link to="/todo">todo示例</Link>
                 <div className="time">
                     <span> 当前时间: {t.toLocaleString()}</span>
-                    <span onClick={this.getCurTime.bind(this)}> 点击更新当前时间</span>
+                    <span onClick={this.getCurTime}> 点击更新当前时间</span>
                 </div>
             </div>
         )

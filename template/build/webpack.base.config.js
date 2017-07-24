@@ -49,8 +49,8 @@ module.exports = {
         modules: [path.join(__dirname, '../node_modules')],
         alias:{
             '@src': path.resolve(__dirname, '../src'),
-            '@components': path.resolve(__dirname, '../src/components'),
-            '@redux': path.resolve(__dirname, '../src/redux')
+            '@components': path.resolve(__dirname, '../src/components'){{#if_eq state 'redux'}},
+            '@redux': path.resolve(__dirname, '../src/redux'){{/if_eq}}
         }
     },
 

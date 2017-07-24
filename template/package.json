@@ -1,8 +1,8 @@
 {
-  "name": "react-startup",
-  "version": "0.0.1",
-  "description": "A New React Project",
-  "author": "dwqs",
+  "name": "{{name}}",
+  "version": "{{version}}",
+  "description": "{{description}}",
+  "author": "{{author}}",
   "license": "MIT",
   "scripts": {
     "prepush": "npm run ilint -q",
@@ -13,21 +13,24 @@
     "fix": "npx eslint --fix src/**/*.js"
   },
   "dependencies": {
-    "async-react-component": "^0.5.6",
-    "babel-polyfill": "^6.23.0",
     "history": "^4.6.3",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.2",
+    {{#if_eq state 'redux'}}
+    "react-redux": "^5.0.5",
     "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-actions-promise": "^1.1.2",
+    {{/if_eq}}
+    {{#if_eq state 'mobx'}}
     "mobx": "^3.2.1",
     "mobx-react": "^4.2.2",
-    "mobx-react-router": "^4.0.1"
+    "mobx-react-router": "^4.0.1",
+    {{/if_eq}}
+    "async-react-component": "^0.5.6"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
@@ -56,7 +59,9 @@
     "happypack": "^4.0.0-beta.1",
     "html-webpack-plugin": "^2.29.0",
     "husky": "^0.14.3",
+    {{#imageminifying}}
     "imagemin-webpack-plugin": "^1.5.0-beta.0",
+    {{/imageminifying}}
     "less": "^2.7.2",
     "less-loader": "^4.0.4",
     "open-browser-webpack-plugin": "^0.0.5",

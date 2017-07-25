@@ -4,6 +4,10 @@
 
 import {observable, action} from 'mobx';
 
+import awaitTo from 'async-await-error-handling';
+
+import api from '@src/network/api';
+
 class ToDoList {
     @observable
     list = null;
@@ -14,7 +18,11 @@ class ToDoList {
 
     @action
     async addToDo(item){
-        let v = await Promise.resolve(`async: ${item}`);
+        const [err, data] = await awaitTo(api.getIndex());
+        if(!data){
+            return Promise.reject(err);
+        }
+        let v = await awaitTo(Promise.resolve(`async: ${item}`));
         // another way to use async/await: https://github.com/mobxjs/mobx/issues/299
         // docs: https://mobx.js.org/refguide/action.html
         this.todoChange(v);

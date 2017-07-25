@@ -29,8 +29,10 @@
     "mobx": "^3.2.1",
     "mobx-react": "^4.2.2",
     "mobx-react-router": "^4.0.1",
+    "async-await-error-handling": "^0.5.2",
     {{/if_eq}}
-    "async-react-component": "^0.5.6"
+    "async-react-component": "^0.5.6",
+    "axios": "^0.16.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",

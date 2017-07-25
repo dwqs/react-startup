@@ -9,20 +9,21 @@ const webpack = require('webpack');
 
 {{#if_eq state 'redux'}}
 let vendors = [
-    'react', 'react-router-dom', 'react-dom', 'prop-types', 'history', 'async-react-component',
     'redux', 'react-redux', 'react-router-redux', 'redux-actions', 'redux-actions-promise'
 ];
 {{/if_eq}}
 {{#if_eq state 'mobx'}}
 let vendors = [
-    'react', 'react-router-dom', 'react-dom', 'prop-types', 'history', 'async-react-component',
-    'mobx', 'mobx-react', 'mobx-react-router'
+    'mobx', 'mobx-react', 'mobx-react-router', 'async-await-error-handling'
 ];
 {{/if_eq}}
 
 module.exports = {
     entry: {
-        vendor: vendors
+        vendor: vendors.concat(
+            'react', 'react-router-dom', 'react-dom', 'prop-types', 'history', 'async-react-component',
+            'axios'
+        )
     },
     output: {
         path: path.join(__dirname, './{{path}}'),

@@ -10,6 +10,10 @@ module.exports = {
             "message" : "Project name",
             "default" : "react-startup"
         },
+        "author": {
+            "type"   : "string",
+            "message": "Author"
+        },
         "version": {
             "type"    : "string",
             "message" : "Project version",
@@ -20,10 +24,6 @@ module.exports = {
             "required": false,
             "message" : "Project description",
             "default" : "A new React project"
-        },
-        "author": {
-            "type"   : "string",
-            "message": "Author"
         },
         "state": {
             "type": "list",
@@ -47,18 +47,6 @@ module.exports = {
             "message" : "client port",
             "default" : 3000
         },
-        "path": {
-            "type"    : "string",
-            "required": false,
-            "message" : "Webpack's outputPath, starts with dirName, eg:'dist' or 'dist/build'",
-            "default" : "dist"
-        },
-        "publicPath": {
-            "type"    : "string",
-            "required": false,
-            "message" : "Webpack dev server's publicPath, starts with '/' and ends with '/'",
-            "default" : "/"
-        },
         "prefix": {
             "type"    : "string",
             "required": false,
@@ -72,7 +60,7 @@ module.exports = {
     },
     "filters": {
         "src/redux/**/*": "state === 'redux'",
-        "src/model/**/*": "state === 'mobx'"
+        "src/mobx/**/*": "state === 'mobx'"
     },
     "completeMessage": "To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dll\n  npm run dev\n\nDocumentation can be found at https://github.com/dwqs/react-startup"
 }

@@ -17,7 +17,7 @@ import {store, history} from '../redux/store';
 {{#if_eq state 'mobx'}}
 import {Provider} from 'mobx-react';
 import {useStrict} from 'mobx';
-import {stores, history} from '../model/stores';
+import {stores, history} from '../mobx/stores';
 
 useStrict(true);
 {{/if_eq}}

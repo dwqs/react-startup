@@ -68,10 +68,6 @@ module.exports = {
         "imageminifying": {
             "type": "confirm",
             "message": "Need image minifying in production?"
-        },
-        "jquery": {
-            "type": "confirm",
-            "message": "Need jQuery(2.1.0, auto import by cdn)?"
         }
     },
     "filters": {

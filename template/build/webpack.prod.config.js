@@ -111,14 +111,13 @@ prodConfig.plugins = (prodConfig.plugins || []).concat([
     new ParallelUglifyPlugin({
         workerCount: os.cpus().length,
         cacheDir: '.cache/',
+        sourceMap: true,
         uglifyJS: {
             compress: {
                 warnings: false,
                 drop_debugger: true,
                 drop_console: true
             },
-            comments: false,
-            sourceMap: true,
             mangle: true
         }
     }),

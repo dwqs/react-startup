@@ -3,6 +3,7 @@
  */
 
 import './reset.less';
+import 'babel-polyfill';
 
 import React, {Component, Children} from 'react';
 import ReactDOM from 'react-dom';

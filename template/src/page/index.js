@@ -71,7 +71,7 @@ if(env === 'development'){
 } else {
     window.onload = function () {
         ReactDOM.render(
-            RootApp,
+            <RootApp />,
             document.getElementById('app')
         );
     };

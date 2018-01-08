@@ -61,9 +61,6 @@
     "happypack": "^4.0.0",
     "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
-    {{#imageminifying}}
-    "imagemin-webpack-plugin": "^1.5.0-2",
-    {{/imageminifying}}
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
     "open-browser-webpack-plugin": "^0.0.5",

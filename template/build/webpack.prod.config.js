@@ -84,7 +84,9 @@ prodConfig.plugins = (prodConfig.plugins || []).concat([
     new OptimizeCSSPlugin({
         cssProcessorOptions: {
             safe: true
-        }
+        },
+        cssProcessor: require('cssnano'),
+        assetNameRegExp: /\.less|\.css$/g
     }),
 
     new webpack.optimize.CommonsChunkPlugin({
@@ -118,7 +120,7 @@ prodConfig.plugins = (prodConfig.plugins || []).concat([
             mangle: true
         }
     }),
-    
+
     new webpack.optimize.ModuleConcatenationPlugin(),
     new WebpackMd5Hash()
 ]);

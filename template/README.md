@@ -7,9 +7,6 @@
  # 安装依赖
  npm i
 
- # 生成 dll 文件, 用于缩短开发时的 rebuild 时间
- npm run dll
-
  # 启动脚本
  npm run dev
 ```

@@ -1,92 +1,125 @@
-/**
- * Created by pomy on 20/07/2017.
- */
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const HappyPack = require('happypack');   
 
-'use strict';
-
-let path = require('path');
-let webpack = require('webpack');
-let HtmlWebpackPlugin = require('html-webpack-plugin');
-let CopyWebpackPlugin = require('copy-webpack-plugin');
-
-let config = require('../config');
+const getHappyPackConfig = require('./happypack');
+const config = require('../config');
+const utils = require('./utils');
 
 const env = process.env.NODE_ENV || 'development';
-const apiPrefix = env === 'development' ? config.dev.prefix : config.build.prefix;
+const apiPrefix = env === 'development' ? config[env].prefix : config[env].prefix;
 
 console.log('---------env------:', env, '------apiPrefix-------:', apiPrefix);
 
 module.exports = {
-    context: path.resolve(__dirname, "../src"),
+    mode: env,
+    context: utils.resolve('src'),
     module: {
         noParse: [/static|assets/],
         rules: [
             {
-                test: /\.(png|jpg|gif|jpeg)$/,
+                test: /\.js$/,
+                type: 'javascript/auto',
+                exclude: /node_modules/,
+                loader: 'happypack/loader?id=js'
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                type: 'javascript/auto',
                 use: [{
                     loader: 'url-loader',
                     options: {
                         limit: 8192,
-                        name: '[name].[ext]?[hash:8]'
+                        name: utils.assetsPath('images/[name].[ext]')
                     }
                 }]
             },
             {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                type: 'javascript/auto',
                 use: [{
-                    loader: 'file-loader',
+                    loader: 'url-loader',
                     options: {
-                        limit: 8192,
-                        name: '[name].[ext]?[hash:8]'
+                        limit: 10000,
+                        name: utils.assetsPath('fonts/[name].[ext]')
                     }
                 }]
             }
         ]
     },
 
-    resolve:{
-        extensions:[".js",".jsx"],
-        modules: [path.join(__dirname, '../node_modules')],
-        alias:{
-            '@src': path.resolve(__dirname, '../src'),
-            '@components': path.resolve(__dirname, '../src/components'){{#if_eq state 'redux'}},
-            '@redux': path.resolve(__dirname, '../src/redux'){{/if_eq}}
+    resolve: {
+        extensions: ['.vue', '.js', '.json'],
+        modules: [utils.resolve('node_modules')],
+        alias: {
+            '@src': utils.resolve('src'),
+            '@components': utils.resolve('src/components')
         }
     },
 
     resolveLoader: {
-        modules: [path.join(__dirname, '../node_modules')]
+        modules: [utils.resolve('node_modules')]
     },
 
     performance: {
         hints: false
     },
 
-    externals: {
-        'babel-polyfill': 'window'
+    stats: {
+        children: false
     },
 
-    plugins:[
-
-        new webpack.DefinePlugin({
-            'window.PREFIX': JSON.stringify(apiPrefix)
+    plugins: [
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            // 引入 dll 生成的 manifest 文件
+            manifest: utils.resolve('dist/vendor-manifest.json')
         }),
 
-        //copy assets
+        new HappyPack(getHappyPackConfig({
+            id: 'js',
+            loaders: [{
+                path: 'babel-loader',
+                query: {
+                    cacheDirectory: true
+                }
+            }] 
+        })),
+
+        // copy assets
         new CopyWebpackPlugin([
-            {context: '../src', from: 'assets/**/*', to: path.resolve(__dirname, '../dist'), force: true}
+            { 
+                context: '..', 
+                from: 'static/**/*', 
+                to: utils.resolve('dist'), 
+                force: true,
+                ignore: ['.*']
+            }, 
+            {
+                context: '../src',
+                from: 'assets/**/*',
+                to: utils.resolve('dist'),
+                force: true,
+                ignore: ['.*']
+            }
         ]),
 
+        // https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'index.html',
             inject: true,
-            env: process.env.NODE_ENV,
+            env: env,
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
                 removeAttributeQuotes: false
             }
-        })
+        }),
+
+        new ProgressBarPlugin()
     ]
-}
+};

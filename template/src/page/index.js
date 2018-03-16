@@ -1,9 +1,5 @@
-/**
- * Created by pomy on 20/07/2017.
- */
-
-import './reset.less';
-import 'babel-polyfill';
+import 'normalize.css';
+// import 'babel-polyfill';
 
 import React, {Component, Children} from 'react';
 import ReactDOM from 'react-dom';

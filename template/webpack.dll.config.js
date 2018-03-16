@@ -1,41 +1,64 @@
-/**
- * Created by pomy on 19/07/2017.
- */
-
-'use strict';
-
 const path = require('path');
 const webpack = require('webpack');
+const HappyPack = require('happypack');   
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-{{#if_eq state 'redux'}}
-let vendors = [
-    'redux', 'react-redux', 'react-router-redux', 'redux-actions', 'redux-actions-promise'
-];
-{{/if_eq}}
-{{#if_eq state 'mobx'}}
-let vendors = [
-    'mobx', 'mobx-react', 'mobx-react-router', 'async-await-error-handling'
-];
-{{/if_eq}}
+const getHappyPackConfig = require('./build/happypack');
+const pkg = require('./package.json');
+let dependencies = Object.keys(pkg['dependencies']);
 
-module.exports = {
+dependencies = dependencies.map(item => {
+    if (item === 'normalize.css') {
+        return 0;
+    }
+    return item;
+}).filter(item => !!item);
+
+const env = process.env.NODE_ENV || 'development';
+
+const dllConfig = {
+    context: process.cwd(),
+    mode: env,
     entry: {
-        vendor: vendors.concat(
-            'react', 'react-router-dom', 'react-dom', 'prop-types', 'history', 'async-react-component',
-            'axios'
-        )
+        vendor: dependencies
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js/,
+                loader: 'happypack/loader?id=js'
+            }
+        ]
     },
     output: {
-        path: path.join(__dirname, './dist'),
+        path: path.join(__dirname, 'dist'),
         filename: '[name].dll.js',
-        //定义输出：window.${output.library}
+        // 定义输出：window.${output.library}
         library: '[name]_library'
     },
     plugins: [
         new webpack.DllPlugin({
-            path: path.join(__dirname, './dist', '[name]-manifest.json'),
+            path: path.join(__dirname, 'dist', '[name]-manifest.json'),
             // 和 output.library 一样即可
             name: '[name]_library'
+        }),
+
+        new HappyPack(getHappyPackConfig({
+            id: 'js',
+            loaders: [{
+                path: 'babel-loader',
+                query: {
+                    cacheDirectory: true
+                }
+            }] 
+        })),
+
+        new UglifyJsPlugin({
+            parallel: true,
+            cache: true,
+            sourceMap: false
         })
     ]
-}
+};
+
+module.exports = dllConfig;

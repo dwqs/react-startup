@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -16,6 +16,11 @@ const env = process.env.NODE_ENV || 'development';
 
 module.exports = merge(baseWebpackConfig, {
     entry: {
+        vendors: [
+            'react', 'react-dom', 'async-await-error-handling',
+            'react-router-dom', 'axios', 'async-react-component', 'history',
+            'prop-types'
+        ],
         app: utils.resolve('src/page/index.js')
     },
     module: {
@@ -23,10 +28,10 @@ module.exports = merge(baseWebpackConfig, {
             {
                 test: /\.(less|css)$/,
                 type: 'javascript/auto',
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: ['happypack/loader?id=css']
-                })
+                loaders: [
+                    MiniCssExtractPlugin.loader,
+                    'happypack/loader?id=css'
+                ]
             }
         ]
     },
@@ -34,7 +39,6 @@ module.exports = merge(baseWebpackConfig, {
         filename: utils.assetsPath('js/[name].[chunkhash:8].js'),
         path: config[env].assetsRoot,
         publicPath: config[env].assetsPublicPath,
-        sourceMapFilename: '[file].map',
         chunkFilename: utils.assetsPath('js/[name].[chunkhash:8].js')
     },
     optimization: {
@@ -46,10 +50,15 @@ module.exports = merge(baseWebpackConfig, {
         splitChunks: {
             cacheGroups: {
                 vendors: {
-                    test: /[\\/]node_modules[\\/]/,
                     name: 'vendors',
-                    priority: -20,
-                    chunks: 'all'
+                    priority: -20
+                },
+                commons: {
+                    // 抽取 demand-chunk 下的公共依赖模块
+                    name: 'commons',
+                    minChunks: 3,
+                    chunks: 'async',
+                    minSize: 0
                 }
             }
         }
@@ -63,7 +72,7 @@ module.exports = merge(baseWebpackConfig, {
             loaders: utils.extractCSS()
         })),
 
-        new ExtractTextPlugin({
+        new MiniCssExtractPlugin({
             filename: utils.assetsPath('css/[name].[contenthash:8].css')
         }),
 
@@ -97,6 +106,9 @@ module.exports = merge(baseWebpackConfig, {
             }
         }),
 
-        new WebpackMd5Hash()
+        new WebpackMd5Hash(),
+        new WebpackInlineManifestPlugin({
+            name: 'webpackManifest'
+        })
     ]
 });

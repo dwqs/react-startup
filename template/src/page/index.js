@@ -6,7 +6,7 @@ import 'babel-polyfill';
 
 import React, {Component, Children} from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router} from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
 {{#if_eq state 'redux'}}
 import { Provider } from 'react-redux';
@@ -15,11 +15,13 @@ import { ConnectedRouter } from 'react-router-redux';
 import {store, history} from '../redux/store';
 {{/if_eq}}
 {{#if_eq state 'mobx'}}
-import {Provider} from 'mobx-react';
-import {useStrict} from 'mobx';
-import {stores, history} from '../mobx/stores';
+import { Provider } from 'mobx-react';
+import { configure } from 'mobx';
+import { stores, history } from '../mobx/stores';
 
-useStrict(true);
+configure({
+    enforceActions: true
+});
 {{/if_eq}}
 
 const env = process.env.NODE_ENV || 'development';

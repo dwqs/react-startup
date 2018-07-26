@@ -5,7 +5,8 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const CompressionPlugin = require('compression-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const HappyPack = require('happypack');   
+const HappyPack = require('happypack');
+const WebpackInlineManifestPlugin = require('webpack-inline-manifest-plugin');   
 
 const getHappyPackConfig = require('./happypack');
 const utils = require('./utils');
@@ -77,9 +78,10 @@ module.exports = merge(baseWebpackConfig, {
         }),
 
         new OptimizeCSSPlugin({
-            cssProcessorOptions: {
-                safe: true
-            }
+            parser: require('postcss-safe-parser'),
+            discardComments: {
+                removeAll: true
+            } 
         }),
 
         // gzip

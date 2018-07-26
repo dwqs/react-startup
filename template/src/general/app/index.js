@@ -35,7 +35,7 @@ export default class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            title: 'webpack 3 + react 15 + react-router 4'
+            title: 'webpack 4 + react 16 + react-router 4'
         }
     }
 

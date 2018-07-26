@@ -56,7 +56,8 @@ module.exports = {
         modules: [utils.resolve('node_modules')],
         alias: {
             '@src': utils.resolve('src'),
-            '@components': utils.resolve('src/components')
+            '@components': utils.resolve('src/components'){{#if_eq state 'redux'}},
+            '@redux': utils.resolve('src/redux'){{/if_eq}}
         }
     },
 

@@ -6,17 +6,18 @@ import 'babel-polyfill';
 
 import React, {Component, Children} from 'react';
 import ReactDOM from 'react-dom';
-import { Router } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
 {{#if_eq state 'redux'}}
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router'
+import { ConnectedRouter } from 'connected-react-router';
 
-import {store, history} from '../redux/store';
+import {store, history, rootReducer} from '../redux/store';
 {{/if_eq}}
 {{#if_eq state 'mobx'}}
+import { Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import { configure } from 'mobx';
+
 import { stores, history } from '../mobx/stores';
 
 configure({
@@ -24,56 +25,48 @@ configure({
 });
 {{/if_eq}}
 
-const env = process.env.NODE_ENV || 'development';
-
 import routes from './routes';
 
-const RootApp = () => {
-    {{#if_eq state 'redux'}}
-    return (
-        <Provider store={store}>
-            <ConnectedRouter history={history}>
-                <Router>
+{{#if_eq state 'redux'}}
+const render = () => {
+    ReactDOM.render(
+        <AppContainer>
+            <Provider store={store}>
+                <ConnectedRouter history={history}>
+                    {routes}
+                </ConnectedRouter>
+            </Provider>
+        </AppContainer>,
+        document.getElementById('app')
+    );
+};
+{{/if_eq}}
+{{#if_eq state 'mobx'}}
+const render = () => {
+    ReactDOM.render(
+        <AppContainer>
+            <Provider {...stores}>
+                <Router history={history}>
                     {routes}
                 </Router>
-            </ConnectedRouter>
-        </Provider>
+            </Provider>
+        </AppContainer>,
+        document.getElementById('app')
     );
-    {{/if_eq}}
-    {{#if_eq state 'mobx'}}
-    return (
-        <Provider {...stores}>
-            <Router history={history}>
-                {routes}
-            </Router>
-        </Provider>
-    )
-    {{/if_eq}}
 };
+{{/if_eq}}
 
-if(env === 'development'){
-    window.onload = function () {
-        const render = Component => {
-            ReactDOM.render(
-                <AppContainer>
-                    <Component />
-                </AppContainer>,
-                document.getElementById('app')
-            );
-        };
+window.onload = function () {
+    render();
 
-        render(RootApp);
-
-        // HMR
-        if (module.hot) {
-            module.hot.accept('./routes', () => { render(RootApp); });
-        }
-    };
-} else {
-    window.onload = function () {
-        ReactDOM.render(
-            <RootApp />,
-            document.getElementById('app')
-        );
-    };
-}
+    if (module.hot) {
+        // Reload components
+        module.hot.accept('./routes', () => { render(); });
+        {{#if_eq state 'redux'}}
+        // Reload reducers
+        module.hot.accept('../redux/reducers', () => {
+            store.replaceReducer(connectRouter(history)(rootReducer));
+        });
+        {{/if_eq}}
+    }
+};

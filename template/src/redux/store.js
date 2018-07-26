@@ -2,19 +2,21 @@
  * Created by pomy on 23/07/2017.
  */
 
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { applyMiddleware, compose, createStore, combineReducers } from 'redux'
 import createBrowserHistory from 'history/createBrowserHistory';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { connectRouter, routerMiddleware } from 'connected-react-router'
 import ReduxActionsPromise from 'redux-actions-promise';
 
 import rootReducers from './reducers';
 
-let browserHistory = createBrowserHistory();
+const browserHistory = createBrowserHistory();
 const middleware = routerMiddleware(browserHistory);
 
-export let store = createStore(combineReducers({
-    ...rootReducers,
-    router: routerReducer
-}), applyMiddleware(middleware, ReduxActionsPromise));
+export const store = createStore(
+    connectRouter(history)(combineReducers({...rootReducers})),
+    compose(
+        applyMiddleware(middleware, ReduxActionsPromise)
+    )
+);
 
-export let history = browserHistory;
+export const history = browserHistory;

@@ -10,7 +10,7 @@ export default class Hello extends React.PureComponent{
     constructor(props){
         super(props);
         this.state = {
-            desc: 'A simple template webpack 3 + react 15 + react-router 4 setup for projects'
+            desc: 'A simple template webpack 4 + react 16 + react-router 4 setup for projects'
         }
     }
 

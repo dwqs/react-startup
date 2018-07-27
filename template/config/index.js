@@ -6,7 +6,7 @@ module.exports = {
     assetsPublicPath: '/',
     assetsSubDirectory: 'static',
     contentBase: path.resolve(__dirname, '../dist'),
-    port: 4000,
+    port: 6000,
     prefix: ''
   },
   production: {

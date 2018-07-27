@@ -1,4 +1,4 @@
-import { handleActions } from '../../../../../../../Library/Caches/typescript/2.9/node_modules/@types/redux-actions';
+import { handleActions } from 'redux-actions';
 import * as CONSTANT from '../types';
 
 export default handleActions({
@@ -20,7 +20,7 @@ export default handleActions({
     let list = state.list;
     list.splice(action.payload, 1);
     return Object.assign({}, state, {
-        list: list
+      list: list
     })
   }
 }, {

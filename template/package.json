@@ -20,6 +20,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
+    "es6-promise": "^4.2.4",
     {{#if_eq state 'redux'}}
     "react-redux": "^5.0.7",
     "connected-react-router": "^4.3.0",

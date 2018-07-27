@@ -66,10 +66,6 @@ module.exports = {
     hints: false
   },
 
-  externals: {
-    'es6-promise': 'window.ES6Promise'
-  },
-
   stats: {
     children: false
   },

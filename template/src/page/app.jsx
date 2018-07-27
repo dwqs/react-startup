@@ -1,6 +1,6 @@
-import React from 'react';
+import React from '../../../../../../Library/Caches/typescript/2.9/node_modules/@types/react';
 {{#if_eq state 'redux'}}
-import { Provider } from 'react-redux';
+import { Provider } from '../../../../../../Library/Caches/typescript/2.9/node_modules/@types/react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 
 import { store, history } from '../redux/store';

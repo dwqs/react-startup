@@ -1,7 +1,3 @@
-/**
- * Created by pomy on 23/07/2017.
- */
-
 // time
 export const CURRENT_TIME = 'current_time';
 

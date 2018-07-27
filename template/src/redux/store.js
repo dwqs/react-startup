@@ -1,9 +1,5 @@
-/**
- * Created by pomy on 23/07/2017.
- */
-
-import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
-import createBrowserHistory from 'history/createBrowserHistory';
+import { applyMiddleware, compose, createStore, combineReducers } from '../../../../../../Library/Caches/typescript/2.9/node_modules/redux';
+import createBrowserHistory from '../../../../../../Library/Caches/typescript/2.9/node_modules/@types/history/createBrowserHistory';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import ReduxActionsPromise from 'redux-actions-promise';
 
@@ -14,10 +10,10 @@ const middleware = routerMiddleware(browserHistory);
 
 export const rootReducer = combineReducers({...rootReducers});
 export const store = createStore(
-    connectRouter(browserHistory)(rootReducer),
-    compose(
-        applyMiddleware(middleware, ReduxActionsPromise)
-    )
+  connectRouter(browserHistory)(rootReducer),
+  compose(
+    applyMiddleware(middleware, ReduxActionsPromise)
+  )
 );
 
 export const history = browserHistory;

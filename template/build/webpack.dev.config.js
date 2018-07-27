@@ -14,9 +14,8 @@ const url = `http://localhost:${config[env].port}`;
 module.exports = merge(baseWebpackConfig, {
     entry: {
         app: [
-            'react-hot-loader/patch',
-            'webpack/hot/dev-server',
-            `webpack-dev-server/client?http://localhost:${config[env].port}/`,
+            require.resolve('./polyfills'),
+            require.resolve('react-dev-utils/webpackHotDevClient'),
             utils.resolve('src/page/index.js')
         ]
     },

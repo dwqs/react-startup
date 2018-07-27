@@ -22,7 +22,7 @@ module.exports = merge(baseWebpackConfig, {
             'react-router-dom', 'axios', 'async-react-component', 'history',
             'prop-types'
         ],
-        app: utils.resolve('src/page/index.js')
+        app: [require.resolve('./polyfills'), utils.resolve('src/page/index.js')]
     },
     module: {
         rules: [

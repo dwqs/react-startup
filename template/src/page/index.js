@@ -2,11 +2,9 @@
 require('es6-promise').polyfill();
 
 import 'normalize.css';
-import 'babel-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
 {{#if_eq state 'redux'}}
 import { connectRouter } from 'connected-react-router';
 
@@ -24,14 +22,9 @@ import APP from './app';
 const mountNode = document.getElementById('app');
 
 const render = (APP) => {
-  {{#if_eq state 'mobx'}}
-  ReactDOM.unmountComponentAtNode(mountNode);
-  {{/if_eq}}
   ReactDOM.render(
-     <AppContainer>
-      <APP />
-     </AppContainer>,
-     mountNode
+    <APP />,
+    mountNode
    );
 };
 

@@ -7,7 +7,7 @@ module.exports = {
     assetsPublicPath: '/',
     assetsSubDirectory: 'static',
     contentBase: path.resolve(__dirname, '../dist'),
-    port: 3001,
+    port: 3000,
     prefix: '',
     ip: myIP()
   },

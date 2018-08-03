@@ -1,16 +1,16 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const HappyPack = require('happypack');   
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const HappyPack = require('happypack')
 
-const getHappyPackConfig = require('./happypack');
-const config = require('../config');
-const utils = require('./utils');
+const getHappyPackConfig = require('./happypack')
+const config = require('../config')
+const utils = require('./utils')
 
-const env = process.env.NODE_ENV || 'development';
-const apiPrefix = env === 'development' ? config[env].prefix : config[env].prefix;
+const env = process.env.NODE_ENV || 'development'
+const apiPrefix = env === 'development' ? config[env].prefix : config[env].prefix
 
-console.log('---------env------:', env, '------apiPrefix-------:', apiPrefix);
+console.log('---------env------:', env, '------apiPrefix-------:', apiPrefix)
 
 module.exports = {
   mode: env,
@@ -25,7 +25,7 @@ module.exports = {
         loader: 'happypack/loader?id=js'
       },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        test: /\.(png|jpe?g|gif)(\?.*)?$/,
         type: 'javascript/auto',
         use: [{
           loader: 'url-loader',
@@ -34,6 +34,10 @@ module.exports = {
             name: utils.assetsPath('images/[name].[ext]')
           }
         }]
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-react-loader'
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
@@ -54,8 +58,8 @@ module.exports = {
     modules: [utils.resolve('node_modules')],
     alias: {
       '@src': utils.resolve('src'),
-      '@components': utils.resolve('src/components'){{#if_eq state 'redux'}},
-      '@redux': utils.resolve('src/redux'){{/if_eq}}
+      '@components': utils.resolve('src/components'),
+      '@redux': utils.resolve('src/redux')
     }
   },
 
@@ -79,18 +83,18 @@ module.exports = {
         query: {
           cacheDirectory: true
         }
-      }] 
+      }]
     })),
 
     // copy assets
     new CopyWebpackPlugin([
-      { 
-        context: '..', 
-        from: 'static/**/*', 
-        to: utils.resolve('dist'), 
+      {
+        context: '..',
+        from: 'static/**/*',
+        to: utils.resolve('dist'),
         force: true,
         ignore: ['.*']
-      }, 
+      },
       {
         context: '../src',
         from: 'assets/**/*',
@@ -115,4 +119,4 @@ module.exports = {
 
     new ProgressBarPlugin()
   ]
-};
+}

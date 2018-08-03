@@ -10,8 +10,8 @@
     "postinstall": "npm -s run dll",
     "dev": "npx cross-env NODE_ENV=development node ./build/dev-server.js",
     "build": "npx rimraf dist && npx cross-env NODE_ENV=production npx webpack --config ./build/webpack.prod.config.js --progress --hide-modules",
-    "ilint": "npx eslint src/**/*.js",
-    "fix": "npx eslint --fix src/**/*.js",
+    "ilint": "npx standard",
+    "fix": "npx standard --fix",
     "commitmsg": "commitlint -E GIT_PARAMS"
   },
   "dependencies": {
@@ -89,8 +89,7 @@
     "parser": "babel-eslint",
     "ignore": [
       "*.svg",
-      "*.less",
-      "registerServiceWorker.js"
+      "*.less"
     ]
   },
   "husky": {

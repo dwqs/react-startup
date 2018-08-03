@@ -1,15 +1,15 @@
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const OpenBrowserPlugin = require('open-browser-webpack-plugin');
-const HappyPack = require('happypack');   
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const OpenBrowserPlugin = require('open-browser-webpack-plugin')
+const HappyPack = require('happypack')
 
-const getHappyPackConfig = require('./happypack');
-const utils = require('./utils');
-const baseWebpackConfig = require('./webpack.base.config');
-const config = require('../config');
+const getHappyPackConfig = require('./happypack')
+const utils = require('./utils')
+const baseWebpackConfig = require('./webpack.base.config')
+const config = require('../config')
 
-const env = process.env.NODE_ENV || 'development';
-const url = `http://localhost:${config[env].port}`;
+const env = process.env.NODE_ENV || 'development'
+const url = `http://${config[env].ip}:${config[env].port}`
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
@@ -76,4 +76,4 @@ module.exports = merge(baseWebpackConfig, {
     contentBase: config[env].contentBase,
     publicPath: config[env].assetsPublicPath
   }
-});
+})

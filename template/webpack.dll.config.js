@@ -1,19 +1,19 @@
-const path = require('path');
-const webpack = require('webpack');
-const HappyPack = require('happypack');   
+const path = require('path')
+const webpack = require('webpack')
+const HappyPack = require('happypack')
 
-const getHappyPackConfig = require('./build/happypack');
-const pkg = require('./package.json');
-let dependencies = Object.keys(pkg['dependencies']);
+const getHappyPackConfig = require('./build/happypack')
+const pkg = require('./package.json')
+let dependencies = Object.keys(pkg['dependencies'])
 
 dependencies = dependencies.map(item => {
   if (item === 'normalize.css') {
-    return 0;
+    return 0
   }
-  return item;
-}).filter(item => !!item);
+  return item
+}).filter(item => !!item)
 
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development'
 
 const dllConfig = {
   context: process.cwd(),
@@ -49,9 +49,9 @@ const dllConfig = {
         query: {
           cacheDirectory: true
         }
-      }] 
+      }]
     }))
   ]
-};
+}
 
-module.exports = dllConfig;
+module.exports = dllConfig

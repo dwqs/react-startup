@@ -1,19 +1,19 @@
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
-const WebpackMd5Hash = require('webpack-md5-hash');
-const CompressionPlugin = require('compression-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const HappyPack = require('happypack');
-const WebpackInlineManifestPlugin = require('webpack-inline-manifest-plugin');   
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const WebpackMd5Hash = require('webpack-md5-hash')
+const CompressionPlugin = require('compression-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const HappyPack = require('happypack')
+const WebpackInlineManifestPlugin = require('webpack-inline-manifest-plugin')
 
-const getHappyPackConfig = require('./happypack');
-const utils = require('./utils');
-const baseWebpackConfig = require('./webpack.base.config');
-const config = require('../config');
+const getHappyPackConfig = require('./happypack')
+const utils = require('./utils')
+const baseWebpackConfig = require('./webpack.base.config')
+const config = require('../config')
 
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development'
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
@@ -81,7 +81,7 @@ module.exports = merge(baseWebpackConfig, {
       parser: require('postcss-safe-parser'),
       discardComments: {
         removeAll: true
-      } 
+      }
     }),
 
     // gzip

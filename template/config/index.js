@@ -1,4 +1,5 @@
-const path = require('path');
+const path = require('path')
+const myIP = require('my-ip')
 
 module.exports = {
   development: {
@@ -6,8 +7,9 @@ module.exports = {
     assetsPublicPath: '/',
     assetsSubDirectory: 'static',
     contentBase: path.resolve(__dirname, '../dist'),
-    port: 6000,
-    prefix: ''
+    port: 3001,
+    prefix: '',
+    ip: myIP()
   },
   production: {
     assetsRoot: path.resolve(__dirname, '../dist'),

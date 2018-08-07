@@ -56,6 +56,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     modules: [utils.resolve('node_modules')],
+    mainFields: ['jsnext:main', 'main'],
     alias: {
       '@src': utils.resolve('src'),
       '@components': utils.resolve('src/components'),

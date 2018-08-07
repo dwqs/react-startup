@@ -7,15 +7,15 @@ module.exports = {
     assetsPublicPath: '/',
     assetsSubDirectory: 'static',
     contentBase: path.resolve(__dirname, '../dist'),
-    port: 3000,
-    prefix: '',
+    port: {{port}},
+    prefix: '{{prefix}}',
     ip: myIP()
   },
   production: {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsPublicPath: '/',
     assetsSubDirectory: 'static',
-    prefix: '',
+    prefix: '{{prefix}}',
     productionSourceMap: false
   }
 }

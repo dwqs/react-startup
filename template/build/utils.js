@@ -23,7 +23,8 @@ function extractCSS (opts) {
     [loaderKey]: 'css-loader',
     [optionsKey]: {
       minimize: env !== 'development',
-      sourceMap: env === 'development'
+      // https://github.com/webpack-contrib/css-loader/issues/613
+      sourceMap: false
     }
   }
 

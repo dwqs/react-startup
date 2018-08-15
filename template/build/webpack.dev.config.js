@@ -60,6 +60,8 @@ module.exports = merge(baseWebpackConfig, {
     port: config[env].port,
     // #https://github.com/webpack/webpack-dev-server/issues/882
     disableHostCheck: true,
+    // By default files from `contentBase` will not trigger a page reload.
+    watchContentBase: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'

@@ -11,8 +11,8 @@ import { store, history, rootReducer } from '../redux/store';
 import { configure } from 'mobx';
 
 configure({
-    enforceActions: true
-});
+  enforceActions: 'observed'
+})
 {{/if_eq}}
 
 import APP from './app';

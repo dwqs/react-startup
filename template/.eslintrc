@@ -15,5 +15,7 @@
     node: true,
     browser: true
   },
-  extends: "react-app"
+  extends: [
+    "plugin:react/recommended"
+  ]
 }

@@ -3,10 +3,10 @@ module.exports = {
     require('autoprefixer')({
       browsers: [
         'last 5 versions',
-        'Android >= 4.0',
-        'iOS >= 8',
+        'Android >= 4.2',
+        'iOS > 8',
         'safari > 8',
-        'not ie <= 8'
+        'ie >= 10'
       ]
     })
   ]

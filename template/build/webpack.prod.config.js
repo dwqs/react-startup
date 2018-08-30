@@ -6,7 +6,7 @@ const WebpackMd5Hash = require('webpack-md5-hash')
 const CompressionPlugin = require('compression-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const HappyPack = require('happypack')
-const WebpackInlineManifestPlugin = require('webpack-inline-manifest-plugin')
+// const WebpackInlineManifestPlugin = require('webpack-inline-manifest-plugin')
 
 const getHappyPackConfig = require('./happypack')
 const utils = require('./utils')
@@ -14,15 +14,14 @@ const baseWebpackConfig = require('./webpack.base.config')
 const config = require('../config')
 
 const env = process.env.NODE_ENV || 'development'
+const matchVendorsChunk = /react|react-dom|react-router-dom|history|react-loadable|redux|mobx/
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
-    vendors: [
-      'react', 'react-dom', 'async-await-error-handling',
-      'react-router-dom', 'axios', 'async-react-component', 'history',
-      'prop-types'
-    ],
-    app: [require.resolve('./polyfills'), utils.resolve('src/page/index.js')]
+    app: [
+      '@babel/polyfill',
+      utils.resolve('src/page/index.js')
+    ]
   },
   module: {
     rules: [
@@ -43,23 +42,35 @@ module.exports = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[name].[chunkhash:8].js')
   },
   optimization: {
+    minimize: true, // false 则不压缩
     // chunk for the webpack runtime code and chunk manifest
     runtimeChunk: {
+      /**
+       * 单独提取 runtimeChunk，被所有 generated chunk 共享
+       * https://webpack.js.org/configuration/optimization/#optimization-runtimechunk
+       */
       name: 'manifest'
     },
-    // https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
+    /**
+     * https://webpack.js.org/plugins/split-chunks-plugin/
+     * https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
+     */
     splitChunks: {
       cacheGroups: {
-        // vendors: {
-        //     name: 'vendors',
-        //     priority: -20
-        // },
+        // default: false, // 禁止默认的优化
+        vendors: {
+          test (chunk) {
+            return chunk.context.includes('node_modules') && matchVendorsChunk.test(chunk.context)
+          },
+          name: 'vendors',
+          chunks: 'all'
+        },
         commons: {
           // 抽取 demand-chunk 下的公共依赖模块
           name: 'commons',
-          minChunks: 3,
+          minChunks: 3, // 在chunk中最小的被引用次数
           chunks: 'async',
-          minSize: 0
+          minSize: 0 // 被提取模块的最小大小
         }
       }
     }
@@ -108,9 +119,9 @@ module.exports = merge(baseWebpackConfig, {
       }
     }),
 
-    new WebpackMd5Hash(),
-    new WebpackInlineManifestPlugin({
-        name: 'webpackManifest'
-    })
+    new WebpackMd5Hash()
+    // new WebpackInlineManifestPlugin({
+    //     name: 'webpackManifest'
+    // })
   ]
 });

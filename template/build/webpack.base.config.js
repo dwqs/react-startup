@@ -21,6 +21,10 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         type: 'javascript/auto',
+        /**
+         * 一些依赖使用了 es6的语法，如 webpack-dev-server, 这些目前没法一一转换
+         * 所以开发时会在一些低版本浏览器上运行不了，如 iOS safari 9
+         */
         exclude: /node_modules/,
         loader: 'happypack/loader?id=js'
       },
@@ -58,8 +62,8 @@ module.exports = {
     modules: [utils.resolve('node_modules')],
     alias: {
       '@src': utils.resolve('src'),
-      '@components': utils.resolve('src/components'),
-      '@redux': utils.resolve('src/redux')
+      '@components': utils.resolve('src/components'){{#if_eq state 'redux'}},
+      '@redux': utils.resolve('src/redux'){{/if_eq}}
     }
   },
 

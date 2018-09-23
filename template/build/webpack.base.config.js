@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
@@ -89,6 +90,10 @@ module.exports = {
         }
       }]
     })),
+
+    new webpack.DefinePlugin({
+      'window.PREFIX': JSON.stringify(apiPrefix)
+    }),
 
     // copy assets
     new CopyWebpackPlugin([

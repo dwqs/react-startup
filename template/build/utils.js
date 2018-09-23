@@ -24,7 +24,8 @@ function extractCSS (opts) {
     [optionsKey]: {
       minimize: env !== 'development',
       // https://github.com/webpack-contrib/css-loader/issues/613
-      sourceMap: false
+      sourceMap: false,
+      importLoaders: 1
     }
   }
 

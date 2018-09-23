@@ -1,16 +1,16 @@
-import './index.less';
+import './index.less'
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 {{#if_eq state 'redux'}}
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 
-import { getCurTime } from '@redux/time/actions';
+import { getCurTime } from '@redux/time/actions'
 {{/if_eq}}
 {{#if_eq state 'mobx'}}
-import {observer,inject} from 'mobx-react';
+import {observer,inject} from 'mobx-react'
 {{/if_eq}}
-import Hello from '@components/hello/index';
+import Hello from '@components/hello/index'
 {{#if_eq state 'redux'}}
 @connect(
   state => {
@@ -45,7 +45,7 @@ export default class App extends React.Component {
   }
 
   render () {
-    let t = new Date(this.props.time.curTime || Date.now());
+    let t = new Date(this.props.time.curTime || Date.now())
     return (
       <div>
         <h3>{this.state.title}</h3>

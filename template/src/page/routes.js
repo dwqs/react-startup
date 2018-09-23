@@ -1,7 +1,7 @@
 
-import React from 'react';
+import React from 'react'
 
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom'
 import Loadable from 'react-loadable'
 
 const createContainer = loader => Loadable({
@@ -9,9 +9,9 @@ const createContainer = loader => Loadable({
   loader
 })
 
-const App = () => import(/* webpackChunkName: "main" */ '../general/app/index');
-const Info = () => import(/* webpackChunkName: "info" */ '@components/info/index');
-const ToDo = () => import(/* webpackChunkName: "todo" */ '../general/todo/index');
+const App = () => import(/* webpackChunkName: "main" */ '../general/app/index')
+const Info = () => import(/* webpackChunkName: "info" */ '@components/info/index')
+const ToDo = () => import(/* webpackChunkName: "todo" */ '../general/todo/index')
 
 const routes =
   <Switch>
@@ -21,4 +21,4 @@ const routes =
     <Route render={() => <div>404 not found</div>}></Route>
   </Switch>;
 
-export default routes;
+export default routes

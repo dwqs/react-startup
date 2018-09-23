@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class Info extends React.Component{
   constructor (props) {
-    super(props);
+    super(props)
   }
 
   static propTypes = {

@@ -1,8 +1,8 @@
-import {observable, action} from 'mobx';
+import {observable, action} from 'mobx'
 
-import awaitTo from 'async-await-error-handling';
+import awaitTo from 'async-await-error-handling'
 
-import api from '@src/network/api';
+import api from '@src/network/api'
 
 class ToDoList {
   @observable
@@ -14,11 +14,11 @@ class ToDoList {
 
   @action
   async addToDo (item) {
-    const [err, data] = await awaitTo(api.getIndex());
+    const [err, data] = await awaitTo(api.getIndex())
     if (!data) {
-        return Promise.reject(err);
+        return Promise.reject(err)
     }
-    let v = await awaitTo(Promise.resolve(`async: ${item}`));
+    let v = await awaitTo(Promise.resolve(`async: ${item}`))
     // another way to use async/await: https://github.com/mobxjs/mobx/issues/299
     // docs: https://mobx.js.org/refguide/action.html
     this.todoChange(v);
@@ -26,17 +26,17 @@ class ToDoList {
 
   @action
   todoChange (item) {
-    this.list = [].concat(observable(this.list).slice(), item);
+    this.list = [].concat(observable(this.list).slice(), item)
   }
 
   @action
   deleteToDo (index) {
-    let list = observable(this.list).slice();
-    list.splice(index, 1);
+    let list = observable(this.list).slice()
+    list.splice(index, 1)
     this.list = list;
   }
 }
 
-let todo = new ToDoList();
+let todo = new ToDoList()
 
-export default todo;
+export default todo

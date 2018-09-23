@@ -1,4 +1,4 @@
-import network from './index';
+import network from './index'
 
 export default {
   async getIndex(){
@@ -6,6 +6,6 @@ export default {
         url: `https://api.github.com/users/dwqs/repos`,
         data: {}
     });
-    return res;
+    return res
   }
 }

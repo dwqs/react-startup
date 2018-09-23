@@ -1,5 +1,5 @@
-import { handleActions } from 'redux-actions';
-import * as CONSTANT from '../types';
+import { handleActions } from 'redux-actions'
+import * as CONSTANT from '../types'
 
 export default handleActions({
   [CONSTANT.ADD_TODO]: {
@@ -13,12 +13,12 @@ export default handleActions({
     throw(state, action) {
       // async action error
       console.log('async action error', action)
-      return Object.assign({}, state);
+      return Object.assign({}, state)
     }
   },
   [CONSTANT.DELETE_TODO]: (state, action) => {
-    let list = state.list;
-    list.splice(action.payload, 1);
+    let list = state.list
+    list.splice(action.payload, 1)
     return Object.assign({}, state, {
       list: list
     })

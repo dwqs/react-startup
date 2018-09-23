@@ -1,16 +1,16 @@
-import './index.less';
+import './index.less'
 
-import React from 'react';
+import React from 'react'
 {{#if_eq state 'redux'}}
-import {connect} from 'react-redux';
+import {connect} from 'react-redux'
 
-import {addToDo, deleteToDo} from '@redux/todo/actions';
+import {addToDo, deleteToDo} from '@redux/todo/actions'
 {{/if_eq}}
 {{#if_eq state 'mobx'}}
 import {observable} from 'mobx';
-import {observer,inject} from 'mobx-react';
+import {observer,inject} from 'mobx-react'
 {{/if_eq}}
-import Hello from '@components/hello/index';
+import Hello from '@components/hello/index'
 {{#if_eq state 'redux'}}
 @connect(
   state => {
@@ -63,9 +63,9 @@ export default class ToDo extends React.Component{
   }
 
   render () {
-    let {list} = this.props.todo;
+    let {list} = this.props.todo
     {{#if_eq state 'mobx'}}
-    list = observable(list).slice();
+    list = observable(list).slice()
     {{/if_eq}}
     return(
       <div className="todo-list">

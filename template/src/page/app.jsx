@@ -1,17 +1,17 @@
-import React from 'react';
+import React from 'react'
 {{#if_eq state 'redux'}}
-import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
+import { Provider } from 'react-redux'
+import { ConnectedRouter } from 'connected-react-router'
 
-import { store, history } from '../redux/store';
+import { store, history } from '../redux/store'
 {{/if_eq}}
 {{#if_eq state 'mobx'}}
-import { Router } from 'react-router-dom';
-import { Provider } from 'mobx-react';
+import { Router } from 'react-router-dom'
+import { Provider } from 'mobx-react'
 
-import { stores, history } from '../mobx/stores';
+import { stores, history } from '../mobx/stores'
 {{/if_eq}}
-import routes from './routes';
+import routes from './routes'
 
 {{#if_eq state 'redux'}}
 const APP = () => {
@@ -36,4 +36,4 @@ const APP = () => {
 };
 {{/if_eq}}
 
-export default APP;
+export default APP

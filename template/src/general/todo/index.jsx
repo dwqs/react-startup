@@ -68,10 +68,10 @@ export default class ToDo extends React.Component{
     list = observable(list).slice()
     {{/if_eq}}
     return(
-      <div className="todo-list">
+      <div className='todo-list'>
         <Hello />
-        <input type="text" placeholder="输入 todo" value={this.state.val} onChange={this.valChange}/>
-        <button className="add" onClick={this.addTodo}>添加</button>
+        <input type='text' placeholder='输入 todo' value={this.state.val} onChange={this.valChange}/>
+        <button className='add' onClick={this.addTodo}>添加</button>
         <ul>
           {
             list.length ?

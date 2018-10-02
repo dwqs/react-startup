@@ -33,7 +33,7 @@ const APP = () => {
       </Router>
     </Provider>
   )
-};
+}
 {{/if_eq}}
 
 export default APP

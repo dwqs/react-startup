@@ -15,10 +15,10 @@ const ToDo = () => import(/* webpackChunkName: "todo" */ '../general/todo/index'
 
 const routes =
   <Switch>
-    <Route exact path='/' component={createContainer(App)}></Route>
-    <Route path='/info' component={createContainer(Info)}></Route>
-    <Route path='/todo' component={createContainer(ToDo)}></Route>
-    <Route render={() => <div>404 not found</div>}></Route>
+    <Route exact path='/' component={createContainer(App)} />
+    <Route path='/info' component={createContainer(Info)} />
+    <Route path='/todo' component={createContainer(ToDo)} />
+    <Route render={() => <div>404 not found</div>} />
   </Switch>;
 
 export default routes

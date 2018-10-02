@@ -50,13 +50,13 @@ export default class App extends React.Component {
       <div>
         <h3>{this.state.title}</h3>
         <Hello />
-        <p className="doc">
+        <p className='doc'>
           Documentation can be found at:
-          <a href="https://github.com/dwqs/react-startup" target="_blank">react-startup</a>
+          <a href='https://github.com/dwqs/react-startup' target='_blank'>react-startup</a>
         </p>
-        <Link to="/info">查看项目信息</Link>
-        <Link to="/todo">todo示例</Link>
-        <div className="time">
+        <Link to='/info'>查看项目信息</Link>
+        <Link to='/todo'>todo示例</Link>
+        <div className='time'>
           <span> 当前时间: {t.toLocaleString()}</span>
           <span onClick={this.getCurTime}> 点击更新当前时间</span>
         </div>

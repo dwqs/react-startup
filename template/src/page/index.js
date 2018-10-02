@@ -1,4 +1,5 @@
 import 'normalize.css'
+import '@babel/polyfill'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -23,20 +24,20 @@ const render = (APP) => {
     <APP />,
     mountNode
    );
-};
+}
 
 render(APP);
 
 if (module.hot) {
-  module.hot.accept('./app', () => { render(APP); })
+  module.hot.accept('./app', () => { render(APP) })
   {{#if_eq state 'mobx'}}
   // Reload stores
-  module.hot.accept('../mobx/stores', () => { render(APP); })
+  module.hot.accept('../mobx/stores', () => { render(APP) })
   {{/if_eq}}
   {{#if_eq state 'redux'}}
   // Reload reducers
   module.hot.accept('../redux/reducers', () => {
     store.replaceReducer(connectRouter(history)(rootReducer))
-  });
+  })
   {{/if_eq}}
 }

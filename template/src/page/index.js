@@ -4,9 +4,8 @@ import '@babel/polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 {{#if_eq state 'redux'}}
-import { connectRouter } from 'connected-react-router'
-
-import { store, history, rootReducer } from '../redux/store'
+import { store, history } from '../redux/store'
+import createRootReducer from '../redux/reducers'
 {{/if_eq}}
 {{#if_eq state 'mobx'}}
 import { configure } from 'mobx'
@@ -16,17 +15,17 @@ configure({
 })
 {{/if_eq}}
 
-import APP from './app';
+import APP from './app'
 const mountNode = document.getElementById('app')
 
 const render = (APP) => {
   ReactDOM.render(
     <APP />,
     mountNode
-   );
+  )
 }
 
-render(APP);
+render(APP)
 
 if (module.hot) {
   module.hot.accept('./app', () => { render(APP) })
@@ -37,7 +36,7 @@ if (module.hot) {
   {{#if_eq state 'redux'}}
   // Reload reducers
   module.hot.accept('../redux/reducers', () => {
-    store.replaceReducer(connectRouter(history)(rootReducer))
+    store.replaceReducer(createRootReducer(history))
   })
   {{/if_eq}}
 }

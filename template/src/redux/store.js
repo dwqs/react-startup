@@ -1,19 +1,18 @@
-import { applyMiddleware, compose, createStore, combineReducers } from 'redux'
+import { applyMiddleware, compose, createStore } from 'redux'
 import createBrowserHistory from 'history/createBrowserHistory'
-import { connectRouter, routerMiddleware } from 'connected-react-router'
+import { routerMiddleware } from 'connected-react-router'
 import ReduxActionsPromise from 'redux-actions-promise'
 
-import rootReducers from './reducers'
+import createRootReducer from './reducers'
 
 const browserHistory = createBrowserHistory()
 const middleware = routerMiddleware(browserHistory)
 
-export const rootReducer = combineReducers({...rootReducers})
 export const store = createStore(
-  connectRouter(browserHistory)(rootReducer),
+  createRootReducer(browserHistory),
   compose(
     applyMiddleware(middleware, ReduxActionsPromise)
   )
-);
+)
 
 export const history = browserHistory

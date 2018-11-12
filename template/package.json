@@ -20,7 +20,7 @@
     "react-dom": "^16.6.1",
     "react-router-dom": "^4.3.1",
     {{#if_eq state 'redux'}}
-    "react-redux": "^5.1.1",
+    "react-redux": "^5.0.7",
     "connected-react-router": "^5.0.1",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.4",

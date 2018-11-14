@@ -12,5 +12,5 @@ export let history = syncHistoryWithStore(browserHistory, routingStore)
 export let stores = {
   time,
   todo,
-  routing: routingStore,
+  routing: routingStore
 }

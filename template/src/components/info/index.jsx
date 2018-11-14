@@ -1,11 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export default class Info extends React.Component{
-  constructor (props) {
-    super(props)
-  }
-
+export default class Info extends React.Component {
   static propTypes = {
     info: PropTypes.string
   };
@@ -16,8 +12,8 @@ export default class Info extends React.Component{
 
   render () {
     return (
-      <div className='info' style=\{{margin: '10px'}}>
-        <h2 style=\{{margin: '10px', fontSize: '20px'}}>{this.props.info}</h2>
+      <div className='info' style={{ margin: '10px' }}>
+        <h2 style={{ margin: '10px', fontSize: '20px' }}>{this.props.info}</h2>
         <h3>Project Name: 1</h3>
         <h3>Project Version: 2</h3>
         <h3>Author: 3</h3>

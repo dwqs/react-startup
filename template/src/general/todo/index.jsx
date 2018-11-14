@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 import {addToDo, deleteToDo} from '@redux/todo/actions'
 {{/if_eq}}
 {{#if_eq state 'mobx'}}
-import {observable} from 'mobx';
+import {observable} from 'mobx'
 import {observer,inject} from 'mobx-react'
 {{/if_eq}}
 import Hello from '@components/hello/index'
@@ -44,17 +44,17 @@ export default class ToDo extends React.Component{
 
   addTodo = () => {
     {{#if_eq state 'redux'}}
-    this.props.addToDo(this.state.val);
+    this.props.addToDo(this.state.val)
     {{/if_eq}}
     {{#if_eq state 'mobx'}}
-    this.props.todo.addToDo(this.state.val);
+    this.props.todo.addToDo(this.state.val)
     {{/if_eq}}
   }
 
   deleteToDo = (index) => {
     return () => {
       {{#if_eq state 'redux'}}
-      this.props.deleteToDo(index);
+      this.props.deleteToDo(index)
       {{/if_eq}}
       {{#if_eq state 'mobx'}}
       this.props.todo.deleteToDo(index)

@@ -37,10 +37,10 @@ export default class App extends React.Component {
 
   getCurTime= () => {
     {{#if_eq state 'redux'}}
-    this.props.getCurTime();
+    this.props.getCurTime()
     {{/if_eq}}
     {{#if_eq state 'mobx'}}
-    this.props.time.getCurTime();
+    this.props.time.getCurTime()
     {{/if_eq}}
   }
 
@@ -52,7 +52,7 @@ export default class App extends React.Component {
         <Hello />
         <p className='doc'>
           Documentation can be found at:
-          <a href='https://github.com/dwqs/react-startup' target='_blank'>react-startup</a>
+          <a href='https://github.com/dwqs/react-startup' target='_blank' rel='noopener noreferrer'>react-startup</a>
         </p>
         <Link to='/info'>查看项目信息</Link>
         <Link to='/todo'>todo示例</Link>

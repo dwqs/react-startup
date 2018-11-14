@@ -5,7 +5,6 @@ import { Route, Switch } from 'react-router-dom'
 import Loadable from 'react-loadable'
 
 const createContainer = loader => Loadable({
-  /* eslint-disable-next-line */
   loading: () => <div>Loading</div>,
   loader
 })

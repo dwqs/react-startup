@@ -2,7 +2,6 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const WebpackMd5Hash = require('webpack-md5-hash')
 const TerserPlugin = require('terser-webpack-plugin')
 const HappyPack = require('happypack')
 const WebpackInlineManifestPlugin = require('webpack-inline-manifest-plugin')
@@ -120,9 +119,8 @@ module.exports = merge(baseWebpackConfig, {
       filename: utils.assetsPath('css/[name].[contenthash:8].css')
     }),
 
-    new WebpackMd5Hash(),
     new WebpackInlineManifestPlugin({
-        name: 'webpackManifest'
+      name: 'webpackManifest'
     })
   ]
-});
+})

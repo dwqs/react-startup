@@ -22,7 +22,6 @@ function extractCSS (opts) {
   const cssLoader = {
     [loaderKey]: 'css-loader',
     [optionsKey]: {
-      minimize: env !== 'development',
       // https://github.com/webpack-contrib/css-loader/issues/613
       sourceMap: false,
       importLoaders: 1

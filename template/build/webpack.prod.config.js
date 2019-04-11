@@ -17,7 +17,7 @@ const matchVendorsChunk = /react|react-dom|react-router-dom|history|react-loadab
 module.exports = merge(baseWebpackConfig, {
   entry: {
     app: [
-      '@babel/polyfill',
+      // '@babel/polyfill',
       utils.resolve('src/page/index.js')
     ]
   },

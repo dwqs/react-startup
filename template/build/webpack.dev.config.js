@@ -14,7 +14,7 @@ const url = `http://${config[env].ip}:${config[env].port}`
 module.exports = merge(baseWebpackConfig, {
   entry: {
     app: [
-      '@babel/polyfill',
+      // '@babel/polyfill',
       require.resolve('react-dev-utils/webpackHotDevClient'),
       utils.resolve('src/page/index.js')
     ]
